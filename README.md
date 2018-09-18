@@ -6,6 +6,7 @@ Predicting house prices using two methods
 1) Parametric (Linear Regression,...)
 
 Linear Regression is easy to interpret
+
 2) Non-parametric approach (knn method)
 
 Given a point x, calulate the distance of point x between all its neighours. And get K nearest neighbours. The prediction is weighted average, which means nearer neighbour would be more important in prediciton. The equation is (1-dist/total_dist)* SalePrice. We use cross validation to determine the K.
