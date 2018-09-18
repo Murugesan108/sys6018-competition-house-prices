@@ -1,5 +1,5 @@
 # sys6018-competition-house-prices
-Kaggle competition to predict the house prices
+Kaggle competition #2 to predict the house prices
 
 Prediction house prices using two methods
 
