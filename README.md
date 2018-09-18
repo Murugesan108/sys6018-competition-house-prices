@@ -4,18 +4,19 @@ Kaggle competition #2 to predict the house prices
 Predicting house prices using two methods
 
 1) Parametric (Linear Regression,...)
-
-Linear Regression is easy to interpret
+Linear Regression is easy to interpret and we get the variable significance for each variable
 
 2) Non-parametric approach (knn method)
-
 Given a point x, calulate the distance of point x between all its neighours. And get K nearest neighbours. The prediction is weighted average, which means nearer neighbour would be more important in prediciton. The equation is (1-dist/total_dist)* SalePrice. We use cross validation to determine the K.
+
 
 Project Members:
 1) Andrew Dahbura
 2) Boda Ye
 3) Murugesan Ramakrishnan
 
+
+Work splitup:
 To start the project, Andrew worked on exploratory data analysis, visualization and data exploration
 in order to better understand the data. Data exploration involved investigating the response variable,
 including its summary and distribution, and then investigating the relationship between the response
