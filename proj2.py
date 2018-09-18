@@ -4,10 +4,22 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
+train=pd.read_csv('train.csv')
+test=pd.read_csv('test.csv')
+combined=pd.concat([train,test])
+combined.to_csv('combined.csv')
+
+
+
+
+
+
 file=pd.read_csv('combined file.csv')
 #get y_train
 y_train=file['SalePrice'][:1460].values
 y_train
+
+file.shape
 
 
 #dummy the independent variables
@@ -41,6 +53,7 @@ importances = forest.feature_importances_
 print("Feature importance ranking by Random Forest Model:")
 newColumnOrder=[]
 for k,v in sorted(zip(map(lambda x: round(x, 4), importances), x_dummy.columns[1:]), reverse=True):
+    print(str(v)+':'+str(k))
     newColumnOrder.append(v)
 newColumnOrder
 
@@ -138,6 +151,29 @@ def KNN(x_train,y_train,x_pred,k):
     return y_pred
 
 
+#Linear regression is the best to get significance of features and it is easy to explain
+from sklearn.linear_model import LinearRegression,Lasso
+Linear_result = run_cv(x_train_reind, y_train, LinearRegression)
+mean_squared_error(y_train, Linear_result)
+
+
+from sklearn.linear_model import LinearRegression
+regr = LinearRegression()
+# Train the model using the training sets
+regr.fit(x_train_reind, y_train)
+linear_pred=regr.predict(x_pred)
+prediction_linear=pd.DataFrame({'Id':range(1461,2920),'SalePrice':linear_pred})
+prediction_linear.to_csv('prediction_linear.csv')
+
+
+
+
+
+
+
+
+
+
 
 #cross validation to get the best K
 for i in range(3,7):
@@ -154,7 +190,7 @@ for i in range(3,7):
 
 
 
-
+y_pred=KNN(x_train_reind,y_train,x_pred,5)
 prediction=pd.DataFrame({'Id':range(1461,2920),'SalePrice':y_pred})
 prediction.to_csv('prediction.csv')
 prediction
