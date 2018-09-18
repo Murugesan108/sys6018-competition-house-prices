@@ -94,6 +94,8 @@ def run_cv(X, y, clf_class, **kwargs):
     return y_pred
 
 
+
+#This part is used to decide the number of top K fatures we're going to use in modeling
 from sklearn.metrics import mean_squared_error
 import heapq
 locHeap=[]
@@ -108,6 +110,8 @@ for i in range(5):
         #print("Random forest: " +str(num_feats)+ '  '+str(mean_squared_error(y_train, RF_CV_result)))
         heapq.heappush(locHeap,(mean_squared_error(y_train, RF_CV_result),num_feats))
 
+
+#this part is used to top K features we're using
 check=[]
 for i in range(20):
     check.append(heapq.heappop(locHeap)[1])
@@ -146,7 +150,7 @@ def KNN(x_train,y_train,x_pred,k):
 
         dist_total=sum(item[0] for item in y_bucket)
 
-        y_pred.append(sum(y_train[a[1]]*a[0]/dist_total for a in y_bucket))
+        y_pred.append(sum(y_train[a[1]]*(1-a[0]/dist_total) for a in y_bucket))
 
     return y_pred
 
@@ -190,7 +194,7 @@ for i in range(3,7):
 
 
 
-y_pred=KNN(x_train_reind,y_train,x_pred,5)
+y_pred=KNN(x_train_reind,y_train,x_pred,3)
 prediction=pd.DataFrame({'Id':range(1461,2920),'SalePrice':y_pred})
 prediction.to_csv('prediction.csv')
 prediction
